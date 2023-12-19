@@ -62,15 +62,19 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     next();
 })
-
+const file = fs.readFileSync('./9E1C6B252EA33AE887853073281262C5.txt');
 // app.use("/", indexRouter);
 // app.use("/users", userRouter);
 // app.use("/room", chatRoomRouter);
 
-app.get('/api', (req, res) => {
+
+app.get('/api', (res, res) => {
     res.send({
-        people: '123'
+        kityt: "helo"
     })
+})
+app.get('/.well-known/pki-validation/9E1C6B252EA33AE887853073281262C5.txt', (req, res) => {
+    res.sendFile(file)
 })
 
 // catch 404 and forward to error handler
