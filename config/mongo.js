@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
-const CONNECTION_URL = process.env.MONGODB_URI_SERVER;
+//const CONNECTION_URL = process.env.MONGODB_URI_SERVER;
+const CONNECTION_URL = "mongodb://sodro:nguyenqb242@3.27.162.172:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.1.1";
 
 mongoose.connect(CONNECTION_URL, {
   useNewUrlParser: true,
