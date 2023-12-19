@@ -74,7 +74,7 @@ app.get('/api', (req, res) => {
     })
 })
 app.get('/.well-known/pki-validation/9E1C6B252EA33AE887853073281262C5.txt', (req, res) => {
-    res.sendFile('E:/server-pbl4/9E1C6B252EA33AE887853073281262C5.txt')
+    res.sendFile('9E1C6B252EA33AE887853073281262C5.txt')
 })
 
 // catch 404 and forward to error handler
