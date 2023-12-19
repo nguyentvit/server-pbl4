@@ -26,7 +26,7 @@ import chatRoomRouter from "./routes/chatRoom.js";
 
 const app = express();
 
-const port = process.env.PORT || "3000";
+const port = process.env.PORT || "8443";
 const host = process.env.LOCAL_HOST || "localhost";
 app.set("port", port);
 
@@ -62,7 +62,9 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     next();
 })
-const file = fs.readFileSync('./9E1C6B252EA33AE887853073281262C5.txt');
+const key = fs.readFileSync(path.join(__dirname, 'private.key'));
+const cert = fs.readFileSync(path.join(__dirname, 'certificate.crt'));
+const cred = {key, cert};
 // app.use("/", indexRouter);
 // app.use("/users", userRouter);
 // app.use("/room", chatRoomRouter);
@@ -86,7 +88,7 @@ app.use('*', (req, res) => {
 })
 
 // Create HTTP server
-const server = http.createServer(app);
+const server = https.createServer(cred, app);
 const socketio = socket.init(server);
 // // Create socket connection
 global.io = socketio.listen(server);
