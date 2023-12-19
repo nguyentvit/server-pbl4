@@ -26,7 +26,7 @@ import chatRoomRouter from "./routes/chatRoom.js";
 
 const app = express();
 
-const port = process.env.PORT || "3000";
+const port = process.env.PORT || "80";
 const host = process.env.LOCAL_HOST || "localhost";
 app.set("port", port);
 
@@ -86,18 +86,14 @@ app.use('*', (req, res) => {
 })
 
 // Create HTTP server
-// const server = http.createServer(app);
-// const socketio = socket.init(server);
+const server = http.createServer(app);
+const socketio = socket.init(server);
 // // Create socket connection
-// global.io = socketio.listen(server);
-// global.io.on('connection', WebSockets.connection);
+global.io = socketio.listen(server);
+global.io.on('connection', WebSockets.connection);
 // // listen on provided port, on all network interfaces
-// server.listen(port);
+server.listen(port);
 // // event listener for http server "listening" event
-// server.on("listening", () => {
-//     console.log(`Listening on port:: https://localhost:${port}`);
-// })
-
-app.listen(port, () => {
-    console.log("server")
+server.on("listening", () => {
+    console.log(`Listening on port:: https://localhost:${port}`);
 })
