@@ -68,7 +68,7 @@ const file = fs.readFileSync('./9E1C6B252EA33AE887853073281262C5.txt');
 // app.use("/room", chatRoomRouter);
 
 
-app.get('/api', (res, res) => {
+app.get('/api', (req, res) => {
     res.send({
         kityt: "helo"
     })
