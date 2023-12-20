@@ -65,19 +65,10 @@ app.use((req, res, next) => {
 const key = fs.readFileSync(path.join(__dirname, 'private.key'));
 const cert = fs.readFileSync(path.join(__dirname, 'certificate.crt'));
 const cred = {key, cert};
-// app.use("/", indexRouter);
-// app.use("/users", userRouter);
-// app.use("/room", chatRoomRouter);
+app.use("/", indexRouter);
+app.use("/users", userRouter);
+app.use("/room", chatRoomRouter);
 
-
-app.get('/api', (req, res) => {
-    res.send({
-        kityt: "helo"
-    })
-})
-app.get('/.well-known/pki-validation/9E1C6B252EA33AE887853073281262C5.txt', (req, res) => {
-    res.sendFile(path.join(__dirname, '9E1C6B252EA33AE887853073281262C5.txt'));
-})
 
 // catch 404 and forward to error handler
 app.use('*', (req, res) => {
@@ -97,5 +88,5 @@ global.io.on('connection', WebSockets.connection);
 server.listen(port);
 // // event listener for http server "listening" event
 server.on("listening", () => {
-    console.log(`Listening on port:: https://localhost:${port}`);
+    console.log(`Listening on port:: https://3.27.162.172:${port}`);
 })
