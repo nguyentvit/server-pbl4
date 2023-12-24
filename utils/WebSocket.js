@@ -103,10 +103,7 @@ class WebSockets {
 
 
     socket.on('message', (message) => {
-      const user = this.onlineUsers.find(user => user.userId === message.id);
-      if (user) {
-        io.getIO().to(user.socketId).emit("message", message);
-      }
+      io.getIO().broadcast.emit('message', message);
     })
   }
 }
