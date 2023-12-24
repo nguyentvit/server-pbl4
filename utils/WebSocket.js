@@ -95,6 +95,20 @@ class WebSockets {
       }
     })
 
+    socket.on("callUser", (data) => {
+      const user = this.onlineUsers.find(user => user.userId === data.data.id);
+      if (user) {
+        io.getIO().to(user.socketId).emit("callUser", {signal: data.signalData, from: data.from, name: data.name})
+      }
+    })
+
+    socket.on("answerCallTest", (data) => {
+      const user = this.onlineUsers.find(user => user.userId === data.id);
+      if (user) {
+        io.getIO().to(user.socketId).emit("callAcceptedTest", data.signal);
+      }
+    })
+
 
     socket.on("disconnect", () => {
       this.onlineUsers = this.onlineUsers.filter(user => user.socketId !== socket.id);
@@ -102,9 +116,7 @@ class WebSockets {
     })
 
 
-    socket.on('message', (message) => {
-      io.getIO().broadcast.emit('message', message);
-    })
+    
   }
 }
 
