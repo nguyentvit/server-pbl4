@@ -66,7 +66,7 @@ const key = fs.readFileSync(path.join(__dirname, 'private.key'));
 const cert = fs.readFileSync(path.join(__dirname, 'certificate.crt'));
 //const caclient = fs.readFileSync(path.join(__dirname, 'ca_bundleClient.crt'))
 //const cred = {key, cert, requestCert: true, ca: [caclient]};
-const cred = {key, cert, requestCert: true};
+const cred = {key, cert};
 app.use("/", indexRouter);
 app.use("/users", userRouter);
 app.use("/room", chatRoomRouter);
