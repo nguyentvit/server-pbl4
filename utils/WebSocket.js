@@ -101,6 +101,13 @@ class WebSockets {
       io.getIO().emit("getOnlineUsers", this.onlineUsers);
     })
 
+
+    socket.on('message', (message) => {
+      const user = this.onlineUsers.find(user => user.userId === message.id);
+      if (user) {
+        io.getIO().to(user.socketId).emit("message", message);
+      }
+    })
   }
 }
 

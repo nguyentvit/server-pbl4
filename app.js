@@ -11,7 +11,7 @@ import dotenv from "dotenv";
 import { fileURLToPath } from "url";
 import cors from "cors";
 import socket from "./utils/socket.js";
-import fs from 'fs';
+import fs, { readFileSync } from 'fs';
 dotenv.config();
 // mongo connection
 import "./config/mongo.js";
@@ -64,7 +64,8 @@ app.use((req, res, next) => {
 })
 const key = fs.readFileSync(path.join(__dirname, 'private.key'));
 const cert = fs.readFileSync(path.join(__dirname, 'certificate.crt'));
-const cred = {key, cert};
+const caclient = fs.readFileSync(path.join(__dirname, 'ca_bundleClient.crt'))
+const cred = {key, cert, requestCert: true, ca: [caclient]};
 app.use("/", indexRouter);
 app.use("/users", userRouter);
 app.use("/room", chatRoomRouter);
