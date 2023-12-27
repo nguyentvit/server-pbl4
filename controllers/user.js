@@ -36,8 +36,12 @@ export default
             if (!validation.success) return res.status(400).json({
                 message: 'Error'
             });
+
     
             const { email, password, name } = req.body;
+
+            const user = await UserModel.findOne({email});
+            if(user) return res.status(400).json({message:"User with the given email already exist"});
             const token = jwt.sign(
                 {name, email, password},
                 process.env.SECRET_KEY,
