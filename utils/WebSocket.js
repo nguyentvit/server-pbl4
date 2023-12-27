@@ -77,7 +77,7 @@ class WebSockets {
     socket.on("createChat", (data) => {
       const user = this.onlineUsers.find(user => user.userId === data.recipientId);
       if(user) {
-        io.getIO().to(user.socketId).emit("getNewChat", data.room)
+        io.getIO().to(user.socketId).emit("getNewChat", data)
       }
     })
 
