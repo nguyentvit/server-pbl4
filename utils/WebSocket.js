@@ -74,6 +74,13 @@ class WebSockets {
       }
     })
 
+    socket.on("createChat", (data) => {
+      const user = this.onlineUsers.find(user => user.userId === data.recipientId);
+      if(user) {
+        io.getIO().to(user.socketId).emit("getNewChat", data.room)
+      }
+    })
+
     socket.on("sendcall", (data) => {
       const user = this.onlineUsers.find(user => user.userId === data.data.id);
       if (user) {
@@ -115,6 +122,7 @@ class WebSockets {
         io.getIO().to(user.socketId).emit("leaveCall", data);
       }
     })
+
 
 
     socket.on("disconnect", () => {
