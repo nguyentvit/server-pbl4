@@ -100,60 +100,6 @@ export default {
             })
         }
     },
-    getUserIdsInfo: async (req, res) => {
-        try {
-            const currentLoggedUser = req.user._id;
-            const options = {
-                page: parseInt(req.query.page) || 0,
-                limit: parseInt(req.query.limit) || 10
-            };
-            const rooms = await ChatRoomModel.getChatRoomsByUserId(currentLoggedUser);
-            const roomIds = rooms.map(room => room._id);
-            const recentConversation = await ChatMessageModel.getRecentConversation(
-                roomIds, options, currentLoggedUser
-            );
-            return res.status(200).json({
-                success: true,
-                recentConversation,
-                rooms
-            })
-        } catch (error) {
-            return res.status(500).json({
-                success: false,
-                error: error
-            })
-        }
-        // try {
-        //     const currentLoggedUser = req.user._id;
-        //     const options = {
-        //         page: parseInt(req.query.page) || 0,
-        //         limit: parseInt(req.query.limit) || 10
-        //     };
-        //     const rooms = await ChatRoomModel.getChatRoomsByUserId(currentLoggedUser);
-        //     const roomsInfo = rooms.map(room => {
-        //         const id = room.userIds.find(id => id !== currentLoggedUser);
-        //         return {roomId: room._id, id: id}
-        //     });
-        //     const users = await UserModel.find({});
-        //     const roomsInfoWithName = roomsInfo.map(room => {
-        //         const user = users.find({_id: room.id});
-        //         return {roomId: room.roomId, id: room.id, name: user.name}
-        //     })
-
-        //     return res.status(200).json({
-        //         success: true,
-        //         rooms
-        //     });
-            
-
-        // }
-        // catch (error) {
-        //     return res.status(500).json({
-        //         success: false,
-        //         error: error
-        //     })
-        // }
-    },
     getConversationByRoomId: async (req, res) => {
         try {
             const { roomId } = req.params;
