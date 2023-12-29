@@ -84,6 +84,15 @@ export default {
                 limit: parseInt(req.query.limit) || 10
             };
             const rooms = await ChatRoomModel.getChatRoomsByUserId(currentLoggedUser);
+                const roomsInfo = rooms.map(room => {
+                const id = room.userIds.find(id => id !== currentLoggedUser);
+                return {roomId: room._id, id: id}
+            });
+                const users = await UserModel.find({});
+            const roomsInfoWithName = roomsInfo.map(room => {
+                const user = users.find({_id: room.id});
+                return {roomId: room.roomId, id: room.id, name: user.name}
+            })
             const roomIds = rooms.map(room => room._id);
             const recentConversation = await ChatMessageModel.getRecentConversation(
                 roomIds, options, currentLoggedUser
@@ -91,7 +100,8 @@ export default {
             return res.status(200).json({
                 success: true,
                 recentConversation,
-                rooms
+                rooms,
+                roomsInfoWithName
             })
         } catch (error) {
             return res.status(500).json({
