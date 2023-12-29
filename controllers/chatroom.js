@@ -118,7 +118,10 @@ export default {
                 return {roomId: room.roomId, id: room.id, name: user.name}
             })
 
-            return roomsInfoWithName;
+            return res.status(200).json({
+                success: true,
+                roomsInfoWithName
+            });
             
 
         }
