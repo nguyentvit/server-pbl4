@@ -16,6 +16,6 @@ router.post('/:roomId/message', decode, chatRoomController.postMessage);
 
 router.put('/:roomId/mark-read', decode, chatRoomController.markConversationReadByRoomId);
 
-router.get('/findUserInfo', decode, chatRoomController.getUserIdsInfo);
+router.get('/findUserInfo', decode, chatRoomController.getUserIdsInfo); 
 
 export default router;
