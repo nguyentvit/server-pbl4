@@ -256,6 +256,31 @@ export default
             success: true,
             users
         })
+    },
+    changeInfo: async (req, res) => {
+        const { userId, name, password, imageUrl } = req.body;
+        const user = await UserModel.findOne({_id: userId});
+        if (!user) {
+            return res.status(404).jsonm({
+                success: false,
+                message: 'Not be found user'
+            })
+        } 
+        if (name) {
+            user.name = name;
+        }
+        if (password) {
+            user.password = password;
+        }
+        if (imageUrl) {
+            user.imageUrl = imageUrl;
+        }
+        await user.save();
+        return res.status(200).json({
+            success: true,
+            user
+        })
+
     }
 }
 

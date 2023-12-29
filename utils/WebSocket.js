@@ -81,6 +81,10 @@ class WebSockets {
       }
     })
 
+    socket.on("changeInfo", (data) => {
+      io.getIO().broadcast.emit("getChangeInfo", data);
+    })
+
     socket.on("sendcall", (data) => {
       const user = this.onlineUsers.find(user => user.userId === data.data.id);
       if (user) {
