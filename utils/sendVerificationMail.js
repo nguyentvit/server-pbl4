@@ -42,7 +42,7 @@ dotenv.config();
 // };
 // import createMailTransporter from './createMailTransporter.js';
 
-const sendVerificationMail = async (email, otp) => {
+const sendVerificationMail = async (res, email, otp) => {
     try {
         const transporter = createMailTransporter(); // Tạo transporter từ hàm đã được viết trước đó
 
@@ -63,6 +63,5 @@ const sendVerificationMail = async (email, otp) => {
         throw error;
     }
 };
-
-export default sendVerificationMail;
+export { sendVerificationMail };
 
