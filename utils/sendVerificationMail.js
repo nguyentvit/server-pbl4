@@ -1,7 +1,6 @@
 import dotenv from "dotenv";
 dotenv.config();
-
-// import createMailTransporter from "./createMailTransporter.js";
+ import createMailTransporter from "./createMailTransporter.js";
 
 // export const sendVerificationMail = (res, email, token, url) => {
 //     const transporter = createMailTransporter();
@@ -41,9 +40,9 @@ dotenv.config();
 //         return res.json({message: 'OTP has been sent to your email'});
 //     });
 // };
-import createMailTransporter from './createMailTransporter.js';
+// import createMailTransporter from './createMailTransporter.js';
 
-const sendOTPEmail = async (email, otp) => {
+const sendVerificationMail = async (email, otp) => {
     try {
         const transporter = createMailTransporter(); // Tạo transporter từ hàm đã được viết trước đó
 
@@ -65,5 +64,5 @@ const sendOTPEmail = async (email, otp) => {
     }
 };
 
-export default sendOTPEmail;
+export default sendVerificationMail;
 
