@@ -46,6 +46,10 @@ export default
                 {expiresIn: '20m'}
             );
             sendVerificationMail(res, email, token, 'users');
+            return res.status(200).json({
+                success: "true",
+                message: "Email have seen"
+            })
             // const { email, password, name } = req.body;
 
             // const user = await UserModel.findOne({ email });
