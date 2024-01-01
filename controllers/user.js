@@ -36,28 +36,26 @@ export default
             if (!validation.success) return res.status(400).json({
                 message: 'Error'
             });
-
-    
-            // const { email, password, name } = req.body;
-
-            // const user = await UserModel.findOne({email});
-            // if(user) return res.status(400).json({message:"User with the given email already exist"});
-            // const token = jwt.sign(
-            //     {name, email, password},
-            //     process.env.SECRET_KEY,
-            //     {expiresIn: '20m'}
-            // );
-            // sendVerificationMail(res, email, token, 'users');
             const { email, password, name } = req.body;
 
-            const user = await UserModel.findOne({ email });
-            if (user) return res.status(400).json({ message: "User with the given email already exists" });
+            const user = await UserModel.findOne({email});
+            if(user) return res.status(400).json({message:"User with the given email already exist"});
+            const token = jwt.sign(
+                {name, email, password},
+                process.env.SECRET_KEY,
+                {expiresIn: '20m'}
+            );
+            sendVerificationMail(res, email, token, 'users');
+            // const { email, password, name } = req.body;
 
-            // Tạo mã OTP ở đây (có thể sử dụng thư viện để tạo mã ngẫu nhiên)
-            const otp = generateOTP(); // Hàm generateOTP tự định nghĩa
+            // const user = await UserModel.findOne({ email });
+            // if (user) return res.status(400).json({ message: "User with the given email already exists" });
 
-            // Gửi mã OTP đến email của người dùng
-            sendVerificationMail(res, email, otp);
+            // // Tạo mã OTP ở đây (có thể sử dụng thư viện để tạo mã ngẫu nhiên)
+            // const otp = generateOTP(); // Hàm generateOTP tự định nghĩa
+
+            // // Gửi mã OTP đến email của người dùng
+            // sendVerificationMail(res, email, otp, 'users');
 
             // Lưu mã OTP hoặc thực hiện các bước khác
 
