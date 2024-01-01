@@ -17,4 +17,5 @@ router.post('/reset/:token', userController.resetPassword);
 // active link sign up and store data 
 router.post('/:token', userController.signup);
 
+
 export default router;
