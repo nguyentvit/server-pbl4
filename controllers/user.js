@@ -38,16 +38,29 @@ export default
             });
 
     
+            // const { email, password, name } = req.body;
+
+            // const user = await UserModel.findOne({email});
+            // if(user) return res.status(400).json({message:"User with the given email already exist"});
+            // const token = jwt.sign(
+            //     {name, email, password},
+            //     process.env.SECRET_KEY,
+            //     {expiresIn: '20m'}
+            // );
+            // sendVerificationMail(res, email, token, 'users');
             const { email, password, name } = req.body;
 
-            const user = await UserModel.findOne({email});
-            if(user) return res.status(400).json({message:"User with the given email already exist"});
-            const token = jwt.sign(
-                {name, email, password},
-                process.env.SECRET_KEY,
-                {expiresIn: '20m'}
-            );
-            sendVerificationMail(res, email, token, 'users');
+            const user = await UserModel.findOne({ email });
+            if (user) return res.status(400).json({ message: "User with the given email already exists" });
+
+            // Tạo mã OTP ở đây (có thể sử dụng thư viện để tạo mã ngẫu nhiên)
+            const otp = generateOTP(); // Hàm generateOTP tự định nghĩa
+
+            // Gửi mã OTP đến email của người dùng
+            sendVerificationMail(res, email, otp);
+
+            // Lưu mã OTP hoặc thực hiện các bước khác
+
         } catch (error) {
             res.status(400).json({
                 success: false,
