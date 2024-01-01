@@ -41,7 +41,7 @@ dotenv.config();
 //         return res.json({message: 'OTP has been sent to your email'});
 //     });
 // };
-import createMailTransporter from './createMailTransporter';
+import createMailTransporter from './createMailTransporter.js';
 
 const sendOTPEmail = async (email, otp) => {
     try {
