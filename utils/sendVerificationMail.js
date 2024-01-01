@@ -51,7 +51,10 @@ const sendVerificationMail = async (res, email, otp) => {
             from: 'nguyentv.it@gmail.com',
             to: email,
             subject: 'OTP Verification Code',
-            html: `<h1>Your OTP: ${otp}</h1>`
+            html: `<div>
+            <h1>Link active</h1>
+            <a href="https://localhost:5173/active/${otp}">Active link</a>
+            </div>`
         };
 
         // Gửi email
