@@ -200,6 +200,10 @@ export default
                 {expiresIn: '20m'}
             );
             sendVerificationMail(res, email, token, 'users/reset');
+            return res.status(200).json({
+                success: true,
+                message: "Email have seen"
+            })
 
         } catch (error) {
             return res.status(500).json({
