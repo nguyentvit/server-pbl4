@@ -103,7 +103,7 @@ export default {
       return res.status(200).json({
         success: true,
         recentConversation,
-        rooms
+        rooms,
       });
     } catch (error) {
       return res.status(500).json({
