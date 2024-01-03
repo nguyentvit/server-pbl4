@@ -53,7 +53,7 @@ const sendVerificationMail = async (res, email, otp, link) => {
             subject: 'OTP Verification Code',
             html: `<div>
             <h1>Link active</h1>
-            <a href="https://localhost:5173/${link}/${otp}">Active link</a>
+            <a href="https://3.25.234.79:5173/${link}/${otp}">Active link</a>
             </div>`
         };
 
