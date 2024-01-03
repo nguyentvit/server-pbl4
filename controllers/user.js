@@ -45,7 +45,7 @@ export default
                 process.env.SECRET_KEY,
                 {expiresIn: '20m'}
             );
-            sendVerificationMail(res, email, token, 'users');
+            sendVerificationMail(res, email, token, 'active');
             return res.status(200).json({
                 success: "true",
                 message: "Email have seen"
@@ -199,7 +199,7 @@ export default
                 process.env.SECRET_KEY,
                 {expiresIn: '20m'}
             );
-            sendVerificationMail(res, email, token, 'users/reset');
+            sendVerificationMail(res, email, token, 'reset');
             return res.status(200).json({
                 success: true,
                 message: "Email have seen"

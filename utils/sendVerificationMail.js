@@ -42,7 +42,7 @@ dotenv.config();
 // };
 // import createMailTransporter from './createMailTransporter.js';
 
-const sendVerificationMail = async (res, email, otp) => {
+const sendVerificationMail = async (res, email, otp, link) => {
     try {
         const transporter = createMailTransporter(); // Tạo transporter từ hàm đã được viết trước đó
 
@@ -53,7 +53,7 @@ const sendVerificationMail = async (res, email, otp) => {
             subject: 'OTP Verification Code',
             html: `<div>
             <h1>Link active</h1>
-            <a href="https://localhost:5173/active/${otp}">Active link</a>
+            <a href="https://localhost:5173/${link}/${otp}">Active link</a>
             </div>`
         };
 
